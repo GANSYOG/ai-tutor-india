@@ -1,0 +1,142 @@
+{
+    "name": "AI Tutor India",
+    "short_name": "AI Tutor",
+    "description": "India's #1 AI-powered tutoring platform for CBSE, ICSE, State Boards (K-12). Adaptive practice, instant doubt resolution, progress tracking.",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#0066CC",
+    "background_color": "#FAFAFC",
+    "scope": "/",
+    "lang": "en-IN",
+    "categories": ["education", "productivity", "utilities"],
+    "icons": [
+        {
+            "src": "assets/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Start Learning",
+            "short_name": "Learn",
+            "description": "Continue your personalized learning journey",
+            "url": "/#signup",
+            "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Ask a Doubt",
+            "short_name": "Doubts",
+            "description": "Get instant AI-powered explanations",
+            "url": "/#features",
+            "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Progress Report",
+            "short_name": "Progress",
+            "description": "View your learning analytics and progress",
+            "url": "/#pricing",
+            "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/screenshot-wide.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "AI Tutor India - Chat Interface"
+        },
+        {
+            "src": "assets/screenshot-narrow.png",
+            "sizes": "750x1334",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "AI Tutor India - Mobile App View"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=com.aitutorindia.app",
+            "id": "com.aitutorindia.app"
+        },
+        {
+            "platform": "itunes",
+            "url": "https://apps.apple.com/in/app/ai-tutor-india/id1234567890"
+        }
+    ],
+    "prefer_related_applications": false,
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "launch_handler": {
+        "client_mode": "focus-existing"
+    },
+    "protocol_handlers": [
+        {
+            "protocol": "web+aitutor",
+            "url": "https://www.aitutorindia.com/%s"
+        }
+    ],
+    "share_target": {
+        "action": "/share",
+        "method": "POST",
+        "enctype": "multipart/form-data",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url",
+            "files": [
+                {
+                    "name": "media",
+                    "accept": ["image/*", "video/*", "application/pdf"]
+                }
+            ]
+        }
+    }
+}

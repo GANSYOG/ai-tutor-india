@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://www.aitutorindia.com/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.aitutorindia.com/"/>
+        <xhtml:link rel="alternate" hreflang="hi-IN" href="https://www.aitutorindia.com/hi/"/>
+        <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.aitutorindia.com/ta/"/>
+        <xhtml:link rel="alternate" hreflang="te-IN" href="https://www.aitutorindia.com/te/"/>
+        <xhtml:link rel="alternate" hreflang="mr-IN" href="https://www.aitutorindia.com/mr/"/>
+        <xhtml:link rel="alternate" hreflang="gu-IN" href="https://www.aitutorindia.com/gu/"/>
+        <xhtml:link rel="alternate" hreflang="kn-IN" href="https://www.aitutorindia.com/kn/"/>
+        <xhtml:link rel="alternate" hreflang="bn-IN" href="https://www.aitutorindia.com/bn/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aitutorindia.com/"/>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#features</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#curriculum</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#pricing</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#testimonials</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#how-it-works</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#faq</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/#signup</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    <!-- Board-specific pages (when created) -->
+    <url>
+        <loc>https://www.aitutorindia.com/cbse/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/icse/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/state-boards/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/jee-neet/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Class-specific pages (when created) -->
+    <url>
+        <loc>https://www.aitutorindia.com/class/10/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/class/12/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <!-- Subject pages (when created) -->
+    <url>
+        <loc>https://www.aitutorindia.com/subjects/mathematics/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/subjects/science/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/subjects/english/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <!-- Legal pages -->
+    <url>
+        <loc>https://www.aitutorindia.com/privacy/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/terms/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://www.aitutorindia.com/refund-policy/</loc>
+        <lastmod>2026-08-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+</urlset>

@@ -1,0 +1,30 @@
+# AI Tutor India - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.aitutorindia.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 10
+
+# Disallow private/admin areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /account/
+Disallow: /settings/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /webhook/
+Disallow: /*.json$
+Disallow: /*.xml$ (except sitemap.xml)
+
+# Allow important assets
+Allow: /assets/
+Allow: /styles.css
+Allow: /app.js
+Allow: /manifest.json
+
+# Host directive
+Host: https://www.aitutorindia.com
