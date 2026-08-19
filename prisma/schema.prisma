@@ -142,6 +142,10 @@ model StudentProfile {
   masteryRecords      MasteryRecord[]
   mistakeRecords      MistakeRecord[]
   studyPlans          StudyPlan[]
+  conversations       Conversation[]
+  memories            Memory[]
+  quizResults         QuizResult[]
+  subscription        Subscription?
 
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
@@ -392,4 +396,178 @@ model AuditLog {
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@map("audit_logs")
+}
+
+// Phase 2 Missing Models
+
+model Tutor {
+  id             String         @id @default(cuid())
+  name           String
+  description    String?
+  systemPrompt   String?
+  avatarId       String?
+  voiceId        String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  avatar         Avatar?        @relation(fields: [avatarId], references: [id], onDelete: SetNull)
+  voice          Voice?         @relation(fields: [voiceId], references: [id], onDelete: SetNull)
+  conversations  Conversation[]
+
+  @@map("tutors")
+}
+
+model Avatar {
+  id             String    @id @default(cuid())
+  name           String
+  modelUrl       String
+  thumbnailUrl   String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  tutors         Tutor[]
+
+  @@map("avatars")
+}
+
+model Voice {
+  id             String    @id @default(cuid())
+  name           String
+  provider       String
+  providerVoiceId String
+  language       String    @default("en-IN")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  tutors         Tutor[]
+
+  @@map("voices")
+}
+
+model Course {
+  id             String    @id @default(cuid())
+  title          String
+  description    String?
+  thumbnailUrl   String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  modules        Module[]
+
+  @@map("courses")
+}
+
+model Module {
+  id             String    @id @default(cuid())
+  courseId       String
+  title          String
+  order          Int       @default(1)
+  description    String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  course         Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons        Lesson[]
+
+  @@map("modules")
+}
+
+model Lesson {
+  id             String    @id @default(cuid())
+  moduleId       String
+  title          String
+  order          Int       @default(1)
+  content        String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  module         Module    @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  quizzes        Quiz[]
+
+  @@map("lessons")
+}
+
+model Conversation {
+  id               String    @id @default(cuid())
+  studentProfileId String
+  tutorId          String?
+  title            String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+  tutor            Tutor?         @relation(fields: [tutorId], references: [id], onDelete: SetNull)
+  messages         Message[]
+  memories         Memory[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  role           String       // "user", "assistant", "system"
+  content        String
+  createdAt      DateTime     @default(now())
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model Memory {
+  id               String       @id @default(cuid())
+  conversationId   String?
+  studentProfileId String
+  content          String
+  embedding        String?      // Can be used to store vector embeddings as JSON string or float array if DB supports it. Using string for now.
+  createdAt        DateTime     @default(now())
+
+  conversation     Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@map("memories")
+}
+
+model Quiz {
+  id             String       @id @default(cuid())
+  lessonId       String
+  title          String
+  questions      String       // JSON string of questions
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  lesson         Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  results        QuizResult[]
+
+  @@map("quizzes")
+}
+
+model QuizResult {
+  id               String         @id @default(cuid())
+  quizId           String
+  studentProfileId String
+  score            Float
+  answers          String         // JSON string of answers given
+  createdAt        DateTime       @default(now())
+
+  quiz             Quiz           @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@map("quiz_results")
+}
+
+model Subscription {
+  id               String         @id @default(cuid())
+  studentProfileId String         @unique
+  planName         String         @default("FREE")
+  status           String         @default("ACTIVE")
+  startDate        DateTime       @default(now())
+  endDate          DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
 }
