@@ -1,0 +1,25 @@
+{
+    "workbench.editor.alwaysShowEditorActions": true,
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.centeredLayoutFixedWidth": true,
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.excludeDirty": true,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.preferHistoryBasedLanguageDetection": true,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "workbench.editor.sharedViewState": true,
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.editor.revealIfOpen": true,
+    "workbench.editor.showTabIndex": true,
+    "workbench.editor.wrapTabs": true,
+    "workbench.editor.autoLockGroups": {
+        "default": true,
+        "workbench.editor.chatSession": true,
+        "workbench.editorinputs.searchEditorInput": true,
+        "notebookOutputEditor": true,
+        "jupyter-notebook": true,
+        "repl": true
+    }
+}
