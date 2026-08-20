@@ -1,42 +1,88 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { DummyAIProvider, ChatMessage } from "@/lib/ai-provider";
+import { defaultModel } from "@/lib/ai-provider";
 import { TUTOR_SYSTEM_PROMPT } from "@/lib/prompts";
+import { db } from "@/lib/db";
+import { streamText, type CoreMessage } from "ai";
+import { chatRateLimit } from "@/lib/ratelimit";
 
 export async function POST(req: Request) {
   try {
     const session = await auth();
-    if (!session?.user) {
+    if (!session?.user?.studentProfileId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await req.json();
-    const { messages, conversationId } = body as { messages: ChatMessage[], conversationId?: string };
+    if (process.env.NODE_ENV !== "development") {
+        const identifier = session.user.id;
+        const { success } = await chatRateLimit.limit(identifier);
+
+        if (!success) {
+            return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+        }
+    }
+
+    const { messages, conversationId } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json({ error: "Invalid messages format" }, { status: 400 });
     }
 
-    // In a real scenario, we'd save the user's message to the conversation in DB here
-    // e.g. await db.message.create({ ... })
+    let currentConversationId = conversationId;
 
-    const provider = new DummyAIProvider();
+    if (!currentConversationId) {
+      const conv = await db.conversation.create({
+        data: {
+          studentProfileId: session.user.studentProfileId,
+          title: "New Session",
+        },
+      });
+      currentConversationId = conv.id;
+    }
 
-    // Inject system prompt if it's not the first message
-    const formattedMessages: ChatMessage[] = [
-      { role: "system", content: TUTOR_SYSTEM_PROMPT },
-      ...messages
-    ];
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.role === "user") {
+      await db.message.create({
+        data: {
+          conversationId: currentConversationId,
+          role: "user",
+          content: lastMessage.content,
+        },
+      });
+    }
 
-    const stream = await provider.generateChatResponse(formattedMessages, TUTOR_SYSTEM_PROMPT);
+    const recentMemories = await db.memory.findMany({
+        where: { studentProfileId: session.user.studentProfileId },
+        orderBy: { createdAt: "desc" },
+        take: 5
+    });
 
-    return new Response(stream, {
-      headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
+    let contextString = "";
+    if (recentMemories.length > 0) {
+        contextString = "Recent context about the student:\n" + recentMemories.map(m => `- ${m.content}`).join("\n");
+    }
+
+    const systemPromptWithContext = `${TUTOR_SYSTEM_PROMPT}\n\n${contextString}`;
+
+    const result = await streamText({
+      model: defaultModel,
+      system: systemPromptWithContext,
+      messages: messages.map((m: any) => ({
+        role: m.role,
+        content: m.content
+      })) as CoreMessage[],
+      onFinish: async (completion) => {
+        await db.message.create({
+          data: {
+            conversationId: currentConversationId,
+            role: "assistant",
+            content: completion.text,
+          },
+        });
       },
     });
+
+    return result.toAIStreamResponse();
   } catch (error) {
     console.error("Chat API Error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

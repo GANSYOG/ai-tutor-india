@@ -1,31 +1,13 @@
-export interface ChatMessage {
-  role: "system" | "user" | "assistant";
-  content: string;
-}
+import { createOpenAI } from "@ai-sdk/openai";
+import { env } from "@/config/env";
 
-export interface AIProvider {
-  generateChatResponse(messages: ChatMessage[], systemPrompt?: string): Promise<ReadableStream>;
-}
+export const openrouter = createOpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: env.OPENROUTER_API_KEY || "dummy",
+  headers: {
+    "HTTP-Referer": env.NEXTAUTH_URL || "http://localhost:3000",
+    "X-Title": "AI Tutor India",
+  },
+});
 
-/**
- * A dummy AI provider for Phase 3 prototype before real Gateway integration.
- */
-export class DummyAIProvider implements AIProvider {
-  async generateChatResponse(messages: ChatMessage[], systemPrompt?: string): Promise<ReadableStream> {
-    const encoder = new TextEncoder();
-
-    return new ReadableStream({
-      async start(controller) {
-        const dummyResponse = "This is a simulated AI tutor response. The real AI Gateway will connect here in Phase 2.";
-        const words = dummyResponse.split(" ");
-
-        for (const word of words) {
-          controller.enqueue(encoder.encode(word + " "));
-          await new Promise(resolve => setTimeout(resolve, 50));
-        }
-
-        controller.close();
-      }
-    });
-  }
-}
+export const defaultModel = openrouter.chat("meta-llama/llama-3.3-70b-instruct");
