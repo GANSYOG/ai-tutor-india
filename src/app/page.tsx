@@ -115,7 +115,7 @@ export default function LandingPage() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
-                Your Personal <span className="gradient-text">AI Teacher</span>
+                AI Tutor India: Your Personal <span className="gradient-text">AI Teacher</span>
               </h1>
 
               <p className="text-lg sm:text-xl text-muted-foreground font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
